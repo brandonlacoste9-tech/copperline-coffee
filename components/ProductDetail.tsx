@@ -1,10 +1,12 @@
-export default function ProductDetail({ product, onClose, formatMoney, ICONS, onBuy }) {
+"use client";
+import { useState } from "react";
+export default function ProductDetail({ product, onClose, formatMoney, ICONS, onBuy }: Record<string, any>) {
   const [qty, setQty] = useState(1);
   if (!product) return null;
 
   return (
     <div className="fixed inset-0 z-[60] bg-black/60 flex items-center justify-center p-4" onClick={onClose}>
-      <div className="bg-white w-full max-w-5xl grid md:grid-cols-2 overflow-hidden" onClick={e => e.stopPropagation()}>
+      <div className="bg-white w-full max-w-5xl grid md:grid-cols-2 overflow-hidden" onClick={(e: any) => e.stopPropagation()}>
         <div className="aspect-[4/5] md:aspect-auto bg-zinc-100 flex items-center justify-center relative">
           {ICONS[product.id]}
           <button onClick={onClose} className="absolute top-4 right-4 text-xs tracking-[0.16em] uppercase">Close</button>

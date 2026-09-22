@@ -1,7 +1,8 @@
-export default function ProductGrid({ products, onSelect, formatMoney, ICONS }) {
+"use client";
+export default function ProductGrid({ products, onSelect, formatMoney, ICONS }: Record<string, any>) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-zinc-200">
-      {products.map((product, index) => (
+      {products.map((product: any, index: any) => (
         <div key={product.id} onClick={() => onSelect(product)} className="bg-white group cursor-pointer">
           <div className="aspect-[4/5] overflow-hidden bg-zinc-100 relative">
             <div className="absolute inset-0 flex items-center justify-center">
@@ -11,7 +12,7 @@ export default function ProductGrid({ products, onSelect, formatMoney, ICONS }) 
               {String(index + 1).padStart(2, '0')}
             </div>
             <button
-              onClick={(e) => { e.stopPropagation(); onSelect(product); }}
+              onClick={(e: any) => { e.stopPropagation(); onSelect(product); }}
               className="absolute bottom-4 right-4 px-4 py-1.5 text-xs tracking-[0.16em] uppercase border border-zinc-900 bg-white hover:bg-zinc-900 hover:text-white transition-colors"
             >
               Quick add

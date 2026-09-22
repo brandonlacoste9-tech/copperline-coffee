@@ -1,7 +1,8 @@
+import type { StoreCatalog, StoreProduct } from "./commerce-types";
 
-const CATALOG: StoreCatalog = {
-  "merchant": "Fix these UI quality issues. Keep the same product concept, structure, and design language.\nReturn FULL multi-file sources for every file that still exists.\nCurrent QA score: 24/100 — 2 live/static issues\n\nIssues to fix:\n1. [warning/design] More than 8 distinct text-* sizes — pick a display/body scale and stay on it\n2. [error/render] Live preview root is empty — × — ×\n3. [error/render] × — ×\n4. [warning/structure] H1 present in source but not visible in live DOM\n\nRequirements: real useState where needed, no lorem, no TypeScript types, no imports, entry Component().\nDo not claim the preview compiles. The platform Babel-checks the result after you return. Never write “preview now compiles cleanly” or similar — if a tag is still open, close it. Hyphenated keys like 'canvas-tote': <svg> belong in const ICONS = { ... }, not as bare statements.",
-  "brand": "Fix these UI quality issues. Keep the same product concept, structure, and design language.\nReturn FULL multi-file sources for every file that still exists.\nCurrent QA score: 24/100 — 2 live/static issues\n\nIssues to fix:\n1. [warning/design] More than 8 distinct text-* sizes — pick a display/body scale and stay on it\n2. [error/render] Live preview root is empty — × — ×\n3. [error/render] × — ×\n4. [warning/structure] H1 present in source but not visible in live DOM\n\nRequirements: real useState where needed, no lorem, no TypeScript types, no imports, entry Component().\nDo not claim the preview compiles. The platform Babel-checks the result after you return. Never write “preview now compiles cleanly” or similar — if a tag is still open, close it. Hyphenated keys like 'canvas-tote': <svg> belong in const ICONS = { ... }, not as bare statements.",
+export const CATALOG: StoreCatalog = {
+  "merchant": "Copperline Coffee",
+  "brand": "Copperline Coffee",
   "description": "Field goods for people who still write things down. One catalog, human storefront and agent profile.",
   "policies": {
     "privacy": "/policies/privacy",
@@ -48,9 +49,9 @@ const CATALOG: StoreCatalog = {
   ]
 } as StoreCatalog;
 
-const PRODUCTS: StoreProduct[] = CATALOG.products;
+export const PRODUCTS: StoreProduct[] = CATALOG.products;
 
-function getProduct(id: string): StoreProduct | null {
+export function getProduct(id: string): StoreProduct | null {
   const key = String(id || "").toLowerCase();
   return (
     PRODUCTS.find(
@@ -62,7 +63,7 @@ function getProduct(id: string): StoreProduct | null {
   );
 }
 
-function searchProducts(query?: string): StoreProduct[] {
+export function searchProducts(query?: string): StoreProduct[] {
   const q = String(query || "")
     .trim()
     .toLowerCase();
@@ -72,13 +73,9 @@ function searchProducts(query?: string): StoreProduct[] {
   );
 }
 
-function formatMoney(cents: number, currency = "usd"): string {
+export function formatMoney(cents: number, currency = "usd"): string {
   return new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: currency.toUpperCase(),
   }).format(cents / 100);
-}
-
-export default function CATALOG() {
-  return null;
 }

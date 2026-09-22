@@ -5,17 +5,6 @@ import { getOrder } from "@/lib/orders";
 import { detectChannel } from "@/lib/channel";
 import { CORS } from "@/lib/ucp";
 
-
-
-
-
-
-
-
-
-
-
-
 const TOOLS = [
   {
     name: "search_products",
@@ -59,11 +48,11 @@ const TOOLS = [
   },
 ];
 
-async function OPTIONS() {
+export async function OPTIONS(req: Request) {
   return new NextResponse(null, { status: 204, headers: CORS });
 }
 
-async function GET() {
+export async function GET() {
   return NextResponse.json(
     { protocol: "mcp", tools: TOOLS.map((t) => t.name) },
     { headers: CORS }
@@ -108,7 +97,7 @@ async function callTool(
   throw new Error("Unknown tool: " + name);
 }
 
-async function POST(req: Request) {
+export async function POST(req: Request) {
   let body: Record<string, unknown> = {};
   try {
     body = (await req.json()) as Record<string, unknown>;
@@ -125,7 +114,7 @@ async function POST(req: Request) {
         id,
         result: {
           protocolVersion: "2025-03-26",
-          serverInfo: { name: "Fix these UI quality issues. Keep the same product concept, structure, and design language.\nReturn FULL multi-file sources for every file that still exists.\nCurrent QA score: 24/100 — 2 live/static issues\n\nIssues to fix:\n1. [warning/design] More than 8 distinct text-* sizes — pick a display/body scale and stay on it\n2. [error/render] Live preview root is empty — × — ×\n3. [error/render] × — ×\n4. [warning/structure] H1 present in source but not visible in live DOM\n\nRequirements: real useState where needed, no lorem, no TypeScript types, no imports, entry Component().\nDo not claim the preview compiles. The platform Babel-checks the result after you return. Never write “preview now compiles cleanly” or similar — if a tag is still open, close it. Hyphenated keys like 'canvas-tote': <svg> belong in const ICONS = { ... }, not as bare statements.", version: "0.1.0" },
+          serverInfo: { name: "Copperline Coffee", version: "0.1.0" },
           capabilities: { tools: {} },
         },
       },
@@ -168,5 +157,3 @@ async function POST(req: Request) {
     { status: 400, headers: CORS }
   );
 }
-
-export default TOOLS;

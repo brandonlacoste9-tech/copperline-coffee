@@ -1,4 +1,5 @@
-export default function Header({ onSearch, cartCount, searchTerm }) {
+"use client";
+export default function Header({ onSearch, cartCount, searchTerm }: Record<string, any>) {
   return (
     <header className="sticky top-0 z-50 bg-white border-b border-zinc-200">
       <div className="max-w-7xl mx-auto px-6 md:px-8 h-16 flex items-center justify-between">
@@ -14,7 +15,7 @@ export default function Header({ onSearch, cartCount, searchTerm }) {
             <input
               type="text"
               value={searchTerm}
-              onChange={(e) => onSearch(e.target.value)}
+              onChange={(e: any) => onSearch(e.target.value)}
               placeholder="Search"
               className="w-full bg-zinc-50 border border-zinc-200 px-4 py-1.5 text-sm focus:outline-none focus:border-zinc-900"
             />

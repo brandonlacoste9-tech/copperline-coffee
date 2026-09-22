@@ -1,26 +1,11 @@
-import Header from "./Header";
-import ProductGrid from "./ProductGrid";
-import ProductDetail from "./ProductDetail";
+"use client";
+import { useState } from "react";
 import Footer from "./Footer";
-import CheckoutSuccessPage from "./app/checkout/success/page";
-import CATALOG from "./lib/catalog";
-import UCP_VERSION from "./lib/commerce-types";
-import CHANNELS from "./lib/channel";
-import DDL from "./lib/orders";
-import Stripe from "./lib/checkout";
-import CORS from "./lib/ucp";
-import OPTIONS from "./app/.well-known/ucp/route";
-import OPTIONS from "./app/ucp/v1/products/route";
-import OPTIONS from "./app/api/checkout/route";
-import OPTIONS from "./app/api/acp/checkout-sessions/route";
-import TOOLS from "./app/mcp/route";
-import AdminOrdersPage from "./app/admin/orders/page";
-import Page from "./app/policies/privacy/page";
-import Page from "./app/policies/refund/page";
-import Page from "./app/policies/shipping/page";
-
+import Header from "./Header";
+import ProductDetail from "./ProductDetail";
+import ProductGrid from "./ProductGrid";
 export default function Component() {
-  const [selected, setSelected] = useState(null);
+  const [selected, setSelected] = useState<any>(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [cartCount, setCartCount] = useState(0);
   const [newsletterSuccess, setNewsletterSuccess] = useState(false);
@@ -70,22 +55,22 @@ export default function Component() {
     "trail-brew-kit": <svg viewBox="0 0 96 96" className="w-20 h-20 text-zinc-800" fill="none" stroke="currentColor" strokeWidth="1.25"><path d="M30 30l18 36 18-36"/><circle cx="48" cy="70" r="4"/></svg>
   };
 
-  function formatMoney(cents) {
+  function formatMoney(cents: any) {
     return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(cents / 100);
   }
 
   function getChannel() {
     if (typeof window === 'undefined') return 'human';
-    const params = new URLSearchParams(window.location.search);
+    const params = (typeof window === "undefined" ? new URLSearchParams() : (typeof window === "undefined" ? new URLSearchParams() : (typeof window === "undefined" ? new URLSearchParams() : new URLSearchParams(window.location.search))));
     return params.get('channel') || 'human';
   }
 
-  const filtered = PRODUCTS.filter(p =>
+  const filtered = PRODUCTS.filter((p: any) =>
     p.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
     p.description.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const handleBuy = async (sku, quantity) => {
+  const handleBuy = async (sku: any, quantity: any) => {
     const channel = getChannel();
     const result = await (window as any).createCheckoutSession?.({ sku, quantity, channel: channel });
     if (result?.url) {
@@ -93,11 +78,11 @@ export default function Component() {
     } else {
       alert('Checkout attaches on eject');
     }
-    setCartCount(c => c + quantity);
+    setCartCount((c: any) => c + quantity);
     setSelected(null);
   };
 
-  const handleNewsletter = (e) => {
+  const handleNewsletter = (e: any) => {
     e.preventDefault();
     setNewsletterSuccess(true);
     setTimeout(() => setNewsletterSuccess(false), 2000);
